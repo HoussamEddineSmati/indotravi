@@ -4,18 +4,20 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LucideMenu, LucideX } from 'lucide-react';
-
-const NAV_LINKS = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Packages', href: '/packages' },
-    { label: 'Destinations', href: '/destinations' },
-    { label: 'Contact', href: '/contact' },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export const Navbar = () => {
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { locale, setLocale, t } = useLanguage();
+
+    const NAV_LINKS = [
+        { label: t.nav.home, href: '/' },
+        { label: t.nav.about, href: '/about' },
+        { label: t.nav.packages, href: '/packages' },
+        { label: t.nav.destinations, href: '/destinations' },
+        { label: t.nav.contact, href: '/contact' },
+    ];
 
     return (
         <header className="navbar">
@@ -38,11 +40,23 @@ export const Navbar = () => {
 
                 <div className="navbar-actions">
                     <div className="navbar-lang">
-                        <span className="inactive">De</span>
-                        <span className="active-lang">En</span>
+                        <span
+                            className={locale === 'ar' ? 'active-lang' : 'inactive'}
+                            onClick={() => setLocale('ar')}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            Ar
+                        </span>
+                        <span
+                            className={locale === 'en' ? 'active-lang' : 'inactive'}
+                            onClick={() => setLocale('en')}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            En
+                        </span>
                     </div>
                     <Link href="/login">
-                        <button className="navbar-login">Login</button>
+                        <button className="navbar-login">{t.common.login}</button>
                     </Link>
                     <button
                         className="navbar-mobile-btn"

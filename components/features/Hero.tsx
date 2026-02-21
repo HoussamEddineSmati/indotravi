@@ -1,8 +1,12 @@
+import { useLanguage } from '@/context/LanguageContext';
+
 interface HeroProps {
     children?: React.ReactNode;
 }
 
 export const Hero: React.FC<HeroProps> = ({ children }) => {
+    const { t } = useLanguage();
+
     return (
         <section className="hero">
             <div className="hero-bg">
@@ -15,10 +19,10 @@ export const Hero: React.FC<HeroProps> = ({ children }) => {
 
             <div className="hero-content">
                 <h1 className="hero-title">
-                    Extraordinary natural and cultural charm
+                    {t.hero.title}
                 </h1>
                 <p className="hero-subtitle">
-                    Exploring Indonesia is an unforgettable adventure.
+                    {t.hero.subtitle}
                 </p>
 
                 {children}
@@ -27,10 +31,10 @@ export const Hero: React.FC<HeroProps> = ({ children }) => {
             <div className="stats-section">
                 <div className="stats-grid">
                     {[
-                        { value: '10M+', label: 'Total Customers' },
-                        { value: '09+', label: 'Years Of Experience' },
-                        { value: '12K', label: 'Total Destinations' },
-                        { value: '5.0', label: 'Average Rating' }
+                        { value: '10M+', label: t.hero.stats.customers },
+                        { value: '09+', label: t.hero.stats.experience },
+                        { value: '12K', label: t.hero.stats.destinations },
+                        { value: '5.0', label: t.hero.stats.rating }
                     ].map((stat, index) => (
                         <div key={index} className="stat-card">
                             <div className="stat-value">{stat.value}</div>

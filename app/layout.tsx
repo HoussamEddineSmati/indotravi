@@ -8,18 +8,22 @@ export const metadata: Metadata = {
   description: 'Discover extraordinary natural beauty and cultural charm across Indonesia.',
 };
 
+import { LanguageProvider } from '@/context/LanguageContext';
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <LanguageProvider>
+      <html>
+        <body>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </LanguageProvider>
   );
 }
